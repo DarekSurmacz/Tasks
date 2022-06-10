@@ -12,9 +12,13 @@ import java.util.List;
 public class DbService {
 
     private final TaskRepository repository;
+    public Task getTaskById;
 
     public List<Task> getAllTasks() {
         return repository.findAll();
     }
 
+    public Task getTaskById() {
+        return repository.findById();
+    }
 }

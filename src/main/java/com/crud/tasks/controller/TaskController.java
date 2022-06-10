@@ -19,12 +19,6 @@ public class TaskController {
     private final DbService service;
     private final TaskMapper taskMapper;
 
-//    @Autowired
-//    public TaskController(DbService service, TaskMapper taskMapper) {
-//        this.service = service;
-//        this.taskMapper = taskMapper;
-//    }
-
     @GetMapping
     public List<TaskDto> getTasks() {
         List<Task> tasks = service.getAllTasks();
@@ -33,7 +27,8 @@ public class TaskController {
 
     @GetMapping(value = "{taskId}")
     public TaskDto getTask(@PathVariable Long taskId) {
-        return new TaskDto(1L, "test title", "test_content");
+//        return new TaskDto(1L, "test title", "test_content");
+        return taskMapper.mapToTaskDto(service.getTaskById());
     }
 
     @DeleteMapping(value = "{taskId}")
