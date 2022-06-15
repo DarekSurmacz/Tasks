@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class TaskMapper {
-
+//konwerter (mapper) mapujący typ Task na TaskDto oraz odwrotnie
     public Task mapToTask(final TaskDto taskDto) {
         return new Task(
                 taskDto.getId(),
@@ -31,7 +31,4 @@ public class TaskMapper {
                 .map(this::mapToTaskDto)
                 .collect(Collectors.toList());
     }
-
-
-
 }

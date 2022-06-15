@@ -9,7 +9,10 @@ import java.util.Optional;
 
 @Repository
 public interface TaskRepository extends CrudRepository<Task, Long> {
+    //CrudRepository udostępnia metody oraz logikę pobierania danych z bazy
+    // <obiekt, który będziemy pobierać, typ numeru identyfikacyjnego>
     @Override
+    //nadpisujemy metodę, oryginalnie zwraca typ Iterable<T> , wolimy List<Task>
     List<Task> findAll();
 
     @Override
@@ -17,4 +20,7 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
 
     @Override
     Optional<Task> findById(Long id);
+
+    @Override
+    void deleteById(Long id);
 }
