@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/v1/tasks")
 @RequiredArgsConstructor
+@CrossOrigin("*")
 public class TaskController {
 //   Controller jest częścią aplikacji webowej, która odpowiada za otrzymywanie żądań i zwracanie odpowiedzi.
 //   Wewnątrz controllera wywoływane są metody klas implementujących logikę biznesową.
