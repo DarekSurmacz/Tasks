@@ -25,13 +25,22 @@ public class TrelloClient {
     private String trelloAppKey;
     @Value("${trello.app.token}")
     private String trelloToken;
-
     @Value("$[trello.app.username}")
     private String trelloUsername;
 
-//    UriComponentsBuilder - klasa pozwalająca na tworzenie adresu URL
+    //    UriComponentsBuilder - klasa pozwalająca na tworzenie adresu URL
     public List<TrelloBoardDto> getTrelloBoards() {
-        URI url = UriComponentsBuilder.fromHttpUrl(trelloApiEndpoint + "/members/kodillaautor/boards")
+
+        TrelloBoardDto[] boardsResponse = restTemplate.getForObject(makeURL(), TrelloBoardDto[].class);
+
+        return Optional.ofNullable(boardsResponse)
+                .map(Arrays::asList)
+                .orElse(Collections.emptyList());
+    }
+
+    private URI makeURL() {
+        URI url = UriComponentsBuilder
+                .fromHttpUrl(trelloApiEndpoint + "/members/" + trelloUsername + "/boards")
                 .queryParam("key", trelloAppKey)
                 .queryParam("token", trelloToken)
                 .queryParam("fields", "name,id")
@@ -39,10 +48,6 @@ public class TrelloClient {
                 .encode() //koduje czyli transformuje adres URL
                 .toUri(); //transformuje obiekt UriComponents na obiekt URI
 
-        TrelloBoardDto[] boardsResponse = restTemplate.getForObject(url, TrelloBoardDto[].class);
-
-        return Optional.ofNullable(boardsResponse)
-                .map(Arrays::asList)
-                .orElse(Collections.emptyList());
+        return url;
     }
 }
