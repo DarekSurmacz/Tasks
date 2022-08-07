@@ -14,4 +14,11 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
     @Override
     //nadpisujemy metodę, oryginalnie zwraca typ Iterable<T> , wolimy List<Task>
     List<Task> findAll();
+
+//    Optional<Task> findById(long id);
+//
+//    @Override
+//    Task save(Task task);
+//
+//    void deleteById(Long id);
 }
