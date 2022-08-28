@@ -20,11 +20,13 @@ public class CoreConfiguration {
     }
 
     @Bean
-    public Docket api() {
+    public Docket api() { //klasa Docet odpowiada za udostępnienie metod pozwalających na konfigurację Swaggera
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.any())
+                .apis(RequestHandlerSelectors.basePackage("com.crud.tasks.controller"))
+//                metoda apis() umożliwia wybranie pakietów, które mają być przeszukane w celu znalezienia controllerów
                 .paths(PathSelectors.any())
+//                Metoda paths() pozwala na bardziej dogłębne skanowanie i może np. umożliiwić wybór konkretnych mappingów controllera.
                 .build();
     }
 }
