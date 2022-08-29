@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 public class EmailScheduler {
 
     private static final String SUBJECT = "Tasks: Once a day email";
+    private static final String MESSAGE = "Currently in database you got: ";
     private final SimpleEmailService simpleEmailService;
     private final TaskRepository taskRepository;
     private final AdminConfig adminConfig;
@@ -34,9 +35,9 @@ public class EmailScheduler {
 
     private String mailContent(long size) {
         if(size == 1) {
-            return "Currently in database you got: " + size + " task";
+            return MESSAGE + size + " task.";
         } else {
-            return "Currently in database you got: " + size + " tasks";
+            return MESSAGE + size + " tasks.";
         }
     }
 }
