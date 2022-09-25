@@ -2,19 +2,15 @@ package com.crud.tasks.mapper;
 
 import com.crud.tasks.domain.*;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@SpringBootTest
 public class TrelloMapperTests {
 
-    @Autowired
-    private TrelloMapper trelloMapper;
+    private final TrelloMapper trelloMapper = new TrelloMapper();
 
     @Test
     void mapToBoardsTest() {
