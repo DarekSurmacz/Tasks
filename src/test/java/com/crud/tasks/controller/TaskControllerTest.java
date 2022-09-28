@@ -20,6 +20,8 @@ import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringJUnitWebConfig
 @WebMvcTest(TaskController.class)
@@ -132,17 +134,11 @@ class TaskControllerTest {
     }
 
     @Test
-    void shouldDeleteTask() throws Exception{
-        //Given
-        Task task = new Task(1L, "test task", "test content");
-        TaskDto taskDto = new TaskDto(1L, "test task", "test content");
-
-        when(dbService.saveTask(task)).thenReturn(task);
-        when(taskMapper.mapToTaskDto(task)).thenReturn(taskDto);
-
+    void shouldDeleteTask() throws Exception {
         //When & Then
-        mockMvc.perform(MockMvcRequestBuilders
-                        .delete("/v1/tasks/1"))
+        mockMvc.perform(delete("/v1/tasks/1")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .characterEncoding("UTF-8"))
                 .andExpect(MockMvcResultMatchers.status().is(200));
     }
 }
